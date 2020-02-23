@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Долг</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+
+    <br>
+    <h3 class="mb-4">Расчет долга</h3>
+    <hr>
+
+    <p class="">
+        Простой расчет.<br>
+        Пеня = долг (сумма ТТН) * ставка (0.15% или любая другая из конкретного дела) * количество дней просрочки
+    </p>
+    <p class=""
+       th:text="'период = ' + ${period} + 'дней. Между ' + ${bill.payDate} + ' и ' + ${debt.calculationDate}">
+    </p>
+    <p class=""
+       th:text="${bill.amount} + ' бел.руб. * ' + ${debt.percent} + '% * ' + ${period} + ' дней = ' + ${penalty}">
+    </p>
+    <h2 th:text="'Долг равен: ' + ${penalty} + ' бел.руб.'"></h2>
+
+    <hr>
+    <a th:href="@{/showFormAddBill}">Назад к вводу ТТН</a>
+</div>
+</body>
+</html>

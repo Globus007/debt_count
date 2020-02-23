@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Долг</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+
+    <br>
+    <h3 class="mb-4">Сохранить Долг</h3>
+
+    <form action="#" th:action="@{/saveDebt}" th:object="${debt}" method="post">
+
+        <div class="form-group">
+
+            <input type="hidden" th:field="*{id}">
+
+            <label class="">Введите процент:</label>
+            <input class="form-control mb-4 col-4" type="text" th:field="*{percent}" placeholder="Процент">
+
+            <label class="">Введите дату расчета процентов</label>
+            <input class="form-control mb-4 col-4"
+                   type="date"
+                   th:field="*{calculationDate}"
+                   placeholder="Дата расчета просрочки">
+
+            <button class="btn btn-info col-2" type="submit">Сохранить</button>
+
+
+        </div>
+    </form>
+
+    <hr>
+    <a th:href="@{/showFormAddBill}">Назад к вводу ТТН</a>
+</div>
+</body>
+</html>
