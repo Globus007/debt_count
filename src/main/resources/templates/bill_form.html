@@ -17,34 +17,34 @@
     <hr>
 
     <form action="#" th:action="@{/saveBill}" th:object="${bill}" method="post">
-        <div class="form-group">
+        <div class="form-group align-self-center">
             <input type="hidden" th:field="*{id}">
 
             <label class="" for="number">Введите номер ТТН:</label>
-            <input class="form-control mb-4 col-3"
+            <input class="form-control mb-4 col-md-3"
                    id="number"
                    type="text"
                    th:field="*{number}"
                    placeholder="Номер ТТН">
 
             <label class="">Введите дату ТТН:</label>
-            <input class="form-control mb-4 col-3"
+            <input class="form-control mb-4 col-md-3"
                    type="date"
                    th:field="*{date}"
                    placeholder="Дата ТТН">
 
             <label class="">Введите сумму оплаты (бел.руб.):</label>
-            <input class="form-control mb-4 col-3"
+            <input class="form-control mb-4 col-md-3"
                    type="text" th:field="*{amount}"
                    placeholder="Сумма оплаты">
 
             <label class="">Введите срок оплаты:</label>
-            <input class="form-control mb-4 col-3"
+            <input class="form-control mb-4 col-md-3"
                    type="date"
                    th:field="*{payDate}"
                    placeholder="Срок оплаты">
 
-            <button class="btn btn-info col-3" type="submit">Сохранить</button>
+            <button class="btn btn-info col-md-3" type="submit">Сохранить</button>
         </div>
     </form>
 

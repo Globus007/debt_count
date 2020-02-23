@@ -17,20 +17,20 @@
 
     <form action="#" th:action="@{/saveDebt}" th:object="${debt}" method="post">
 
-        <div class="form-group">
+        <div class="form-group align-self-center">
 
             <input type="hidden" th:field="*{id}">
 
             <label class="">Введите процент:</label>
-            <input class="form-control mb-4 col-3" type="text" th:field="*{percent}" placeholder="Процент">
+            <input class="form-control mb-4 col-md-3" type="text" th:field="*{percent}" placeholder="Процент">
 
             <label class="">Введите дату расчета процентов</label>
-            <input class="form-control mb-4 col-3"
+            <input class="form-control mb-4 col-md-3"
                    type="date"
                    th:field="*{calculationDate}"
                    placeholder="Дата расчета просрочки">
 
-            <button class="btn btn-info col-3" type="submit">Сохранить</button>
+            <button class="btn btn-info col-md-3" type="submit">Сохранить</button>
 
 
         </div>
