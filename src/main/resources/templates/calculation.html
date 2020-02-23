@@ -26,7 +26,7 @@
     <p class=""
        th:text="${bill.amount} + ' бел.руб. * ' + ${debt.percent} + '% * ' + ${period} + ' дней = ' + ${penalty}">
     </p>
-    <h2 th:text="'Долг равен: ' + ${penalty} + ' бел.руб.'"></h2>
+    <h2 th:text="'Долг равен: ' + ${formattedPenalty} + ' бел.руб.'"></h2>
 
     <hr>
     <a th:href="@{/showFormAddBill}">Назад к вводу ТТН</a>

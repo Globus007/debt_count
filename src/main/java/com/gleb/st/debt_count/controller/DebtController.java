@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -55,8 +56,10 @@ public class DebtController {
         System.out.println("period : " + period);
 
         double penalty = bill.getAmount() * debt.getPercent() * period;
+        String formattedPenalty = new DecimalFormat("#0.00").format(penalty);
         model.addAttribute("penalty", penalty);
-        System.out.println("penalty : " + penalty);
+        model.addAttribute("formattedPenalty", formattedPenalty);
+        System.out.println("penalty : " + formattedPenalty);
 
         model.addAttribute("bill", bill);
         model.addAttribute("debt", debt);
