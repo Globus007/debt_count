@@ -17,7 +17,7 @@
     <hr>
 
     <p class="">
-        Простой расчет.<br>
+        Простой расчет долга<br>
         Пеня = долг (сумма ТТН) * ставка (0.15% или любая другая из конкретного дела) * количество дней просрочки
     </p>
     <p class=""
@@ -27,6 +27,19 @@
        th:text="${bill.amount} + ' бел.руб. * ' + ${debt.percent} + '% * ' + ${period} + ' дней = ' + ${penalty}">
     </p>
     <h2 th:text="'Долг равен: ' + ${formattedPenalty} + ' бел.руб.'"></h2>
+
+    <hr>
+    <p class="">
+        Расчет процентов<br>
+        Проценты = долг * ставка нбрб / годовых т.е /365 * дни
+    </p>
+    <p class=""
+       th:text="'Ставка НБРБ на ' + ${refinancingRate.date} + ' составляет ' + ${refinancingRate.value} + '%'">
+    </p>
+    <p class=""
+       th:text="${bill.amount} + ' бел.руб. * ' + ${refinancingRate.value} + '% / (' + ${period} + ' дней * 365 ) = ' +  ${debtPercent}">
+    </p>
+    <h2 th:text="'Процент долга равен: ' + ${formattedDebtPercent} + ' %'"></h2>
 
     <hr>
     <a th:href="@{/showFormAddBill}">Назад к вводу ТТН</a>
