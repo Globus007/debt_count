@@ -1,7 +1,6 @@
-package com.gleb.st.debt_count.entity.refinancing_rate;
+package com.gleb.st.debt_count.component.refinancing_rate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -22,16 +21,6 @@ public class RefinancingRateJsonReader {
 //    public RefinancingRateJsonReader(@Value("${refinancing.rate.url}") String refinancingRateUrl) {
 //        this.refinancingRateUrl = refinancingRateUrl;
 //    }
-
-    public static void main(String[] args) {
-
-        RefinancingRateJsonReader refinancingRateJsonReader = new RefinancingRateJsonReader();
-        java.util.Date today = new java.util.Date();
-        RefinancingRate refinancingRate = refinancingRateJsonReader.getRefinancingRareOnDate(new Date(today.getTime()));
-        double rate = refinancingRate.getValue();
-        System.out.println(rate);
-
-    }
 
     public RefinancingRate getRefinancingRareOnDate(Date date) {
 

@@ -1,4 +1,4 @@
-package com.gleb.st.debt_count.entity.refinancing_rate;
+package com.gleb.st.debt_count.component.refinancing_rate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.stereotype.Component;
