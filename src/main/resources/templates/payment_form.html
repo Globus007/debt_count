@@ -13,24 +13,24 @@
 <div class="container">
 
     <br>
-    <h3 class="mb-4">Сохранить Долг</h3>
+    <h3 class="mb-4">Частичная оплата</h3>
 
-    <form action="#" th:action="@{/saveDebt}" th:object="${debt}" method="post">
+    <form action="#" th:action="@{/savePayment}" th:object="${payment}" method="post">
 
         <div class="form-group align-self-center">
 
             <input type="hidden" th:field="*{id}">
 
-            <label class="">Введите ставку (в %):</label>
-            <input class="form-control mb-4 col-md-3" type="text" th:field="*{percent}" placeholder="Ставка">
+            <label class="">Введите сумму оплаты (бел. руб.):</label>
+            <input class="form-control mb-4 col-md-3" type="text" th:field="*{amount}" placeholder="">
 
-            <label class="">Введите дату расчета процентов</label>
+            <label class="">Введите дату оплаты</label>
             <input class="form-control mb-4 col-md-3"
                    type="date"
-                   th:field="*{calculationDate}"
-                   placeholder="Дата расчета просрочки">
+                   th:field="*{date}"
+                   placeholder="">
 
-            <button class="btn btn-info col-md-3" type="submit">Рассчитать</button>
+            <button class="btn btn-info col-md-3" type="submit">Рассчитать просрочку</button>
 
 
         </div>

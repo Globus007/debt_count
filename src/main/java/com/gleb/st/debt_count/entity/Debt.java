@@ -1,8 +1,11 @@
 package com.gleb.st.debt_count.entity;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Entity;
 import java.sql.Date;
 
+@Component
 public class Debt {
 
     private int id;

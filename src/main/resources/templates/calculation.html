@@ -43,6 +43,18 @@
 
     <hr>
     <a th:href="@{/showFormAddBill}">Назад к вводу ТТН</a>
+    <hr>
+    <a class="btn btn-info col-md-3"
+       th:href="@{/showFormAddPayment}">Добавить частичную оплату</a>
+
+    <hr>
+    <p class="">
+        сложный расчет долга, если была оплата<br>
+    </p>
+    <h2 th:text="'Долг с частичной оплатой равен: ' + ${penaltyWithPayment} + ' бел.руб.'"></h2>
+    <h2 th:text="'Процент с частичной оплатой равен: ' + ${debtPercentWithPayment} + '%'"></h2>
+
+
 </div>
 </body>
 </html>

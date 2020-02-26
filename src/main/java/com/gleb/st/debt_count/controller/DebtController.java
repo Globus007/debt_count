@@ -5,6 +5,7 @@ import com.gleb.st.debt_count.entity.Bill;
 import com.gleb.st.debt_count.entity.Debt;
 import com.gleb.st.debt_count.component.refinancing_rate.RefinancingRate;
 import com.gleb.st.debt_count.component.refinancing_rate.RefinancingRateJsonReader;
+import com.gleb.st.debt_count.entity.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ public class DebtController {
 
     private Bill bill;
     private Debt debt;
+    private Payment payment;
 
     @Autowired
     private RefinancingRateJsonReader refinancingRateJsonReader;
@@ -36,6 +38,22 @@ public class DebtController {
         bill.setPayDate(Date.valueOf("2020-02-10"));
         model.addAttribute("bill", bill);
         return "bill_form";
+    }
+
+    @GetMapping("/showFormAddDebt")
+    public String addDebt(Model model) {
+        debt = new Debt(bill.getId());
+        debt.setCalculationDate(Date.valueOf("2020-02-23"));
+        model.addAttribute("debt", debt);
+        return "debt_form";
+    }
+
+    @GetMapping("/showFormAddPayment")
+    public String addPayment(Model model) {
+        payment = new Payment(bill.getId());
+        payment.setDate(Date.valueOf("2020-02-20"));
+        model.addAttribute("payment", payment);
+        return "payment_form";
     }
 
     @PostMapping("/saveBill")
@@ -56,6 +74,13 @@ public class DebtController {
         return "redirect:/calculatePenalty";
     }
 
+    @PostMapping("/savePayment")
+    public String savePayment(Payment payment) {
+        this.payment = payment;
+        System.out.println(payment);
+        return "redirect:/calculatePenalty";
+    }
+
     @GetMapping("/calculatePenalty")
     public String calculatePenalty(Model model) {
 
@@ -71,6 +96,13 @@ public class DebtController {
         model.addAttribute("penalty", penalty);
         model.addAttribute("formattedPenalty", formattedPenalty);
 
+        if (payment != null) {
+            double penaltyWithPayment = debtCalculator.calculatePenalty(bill, debt, payment);
+            double debtPercentWithPayment = debtCalculator.calculatePercent(bill, debt, payment);
+
+            model.addAttribute("penaltyWithPayment", penaltyWithPayment);
+            model.addAttribute("debtPercentWithPayment", debtPercentWithPayment);
+        }
 
         // addition info for display calculation
         model.addAttribute("bill", bill);
@@ -86,12 +118,5 @@ public class DebtController {
         return "calculation";
     }
 
-    @GetMapping("/showFormAddDebt")
-    public String addDebt(Model model) {
-        debt = new Debt(bill.getId());
-        debt.setCalculationDate(Date.valueOf("2020-02-23"));
-        model.addAttribute("debt", debt);
-        return "debt_form";
-    }
 
 }

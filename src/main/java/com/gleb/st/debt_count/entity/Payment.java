@@ -1,29 +1,23 @@
 package com.gleb.st.debt_count.entity;
 
-import org.springframework.stereotype.Component;
-
 import java.sql.Date;
 
-@Component
-public class Bill {
+public class Payment {
 
     private int id;
-
-    private String number;
-
     private Date date;
-
     private double amount;
+    private int billId;
 
-    private Date payDate;
+    public Payment() {}
 
-    public Bill() {}
-
-    public Bill(String number, Date date, double amount, Date payDate) {
-        this.number = number;
+    public Payment(Date date, double amount) {
         this.date = date;
         this.amount = amount;
-        this.payDate = payDate;
+    }
+
+    public Payment(int billId) {
+        this.billId = billId;
     }
 
     public int getId() {
@@ -32,14 +26,6 @@ public class Bill {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
     }
 
     public Date getDate() {
@@ -58,22 +44,21 @@ public class Bill {
         this.amount = amount;
     }
 
-    public Date getPayDate() {
-        return payDate;
+    public int getBillId() {
+        return billId;
     }
 
-    public void setPayDate(Date payDate) {
-        this.payDate = payDate;
+    public void setBillId(int billId) {
+        this.billId = billId;
     }
 
     @Override
     public String toString() {
-        return "Bill{" +
+        return "Payment{" +
                 "id=" + id +
-                ", number=" + number +
                 ", date=" + date +
                 ", amount=" + amount +
-                ", pay_date=" + payDate +
+                ", billId=" + billId +
                 '}';
     }
 }
