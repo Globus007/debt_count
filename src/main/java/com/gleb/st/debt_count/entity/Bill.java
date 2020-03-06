@@ -17,6 +17,8 @@ public class Bill {
 
     private Date payDate;
 
+    private int contractId;
+
     public Bill() {}
 
     public Bill(String number, Date date, double amount, Date payDate) {
@@ -66,14 +68,23 @@ public class Bill {
         this.payDate = payDate;
     }
 
+    public int getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(int contractId) {
+        this.contractId = contractId;
+    }
+
     @Override
     public String toString() {
         return "Bill{" +
                 "id=" + id +
-                ", number=" + number +
+                ", number='" + number + '\'' +
                 ", date=" + date +
                 ", amount=" + amount +
-                ", pay_date=" + payDate +
+                ", payDate=" + payDate +
+                ", contractId=" + contractId +
                 '}';
     }
 }

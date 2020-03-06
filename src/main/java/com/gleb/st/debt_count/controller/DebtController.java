@@ -1,10 +1,10 @@
 package com.gleb.st.debt_count.controller;
 
 import com.gleb.st.debt_count.component.DebtCalculator;
+import com.gleb.st.debt_count.component.refinancing.rate.reader.RefinancingRateReader;
 import com.gleb.st.debt_count.entity.Bill;
 import com.gleb.st.debt_count.entity.Debt;
-import com.gleb.st.debt_count.component.refinancing_rate.RefinancingRate;
-import com.gleb.st.debt_count.component.refinancing_rate.RefinancingRateJsonReader;
+import com.gleb.st.debt_count.component.refinancing.rate.RefinancingRate;
 import com.gleb.st.debt_count.entity.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class DebtController {
     private Payment payment;
 
     @Autowired
-    private RefinancingRateJsonReader refinancingRateJsonReader;
+    private RefinancingRateReader refinancingRateReader;
 
     @Autowired
     private DebtCalculator debtCalculator;
@@ -109,7 +109,7 @@ public class DebtController {
         model.addAttribute("debt", debt);
 
         java.util.Date today = new java.util.Date();
-        RefinancingRate refinancingRate = refinancingRateJsonReader.getRefinancingRareOnDate(new Date(today.getTime()));
+        RefinancingRate refinancingRate = refinancingRateReader.getRefinancingRareOnDate(new Date(today.getTime()));
         model.addAttribute("refinancingRate", refinancingRate);
 
         long period = debtCalculator.countDelayPeriod(bill.getPayDate(), debt.getCalculationDate());

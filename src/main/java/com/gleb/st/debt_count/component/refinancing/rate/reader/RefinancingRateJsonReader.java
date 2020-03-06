@@ -1,6 +1,8 @@
-package com.gleb.st.debt_count.component.refinancing_rate;
+package com.gleb.st.debt_count.component.refinancing.rate.reader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gleb.st.debt_count.component.refinancing.rate.RefinancingRate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -11,17 +13,14 @@ import java.sql.Date;
 import java.util.logging.Logger;
 
 @Component
-public class RefinancingRateJsonReader {
+public class RefinancingRateJsonReader implements RefinancingRateReader {
 
-    //todo: inject from property file
-    private String refinancingRateUrl = "http://www.nbrb.by/API/RefinancingRate";
+    @Value("${refinancing.rate.url}")
+    private String refinancingRateUrl;
 
     private final static Logger log = Logger.getLogger(RefinancingRateJsonReader.class.getName());
 
-//    public RefinancingRateJsonReader(@Value("${refinancing.rate.url}") String refinancingRateUrl) {
-//        this.refinancingRateUrl = refinancingRateUrl;
-//    }
-
+    @Override
     public RefinancingRate getRefinancingRareOnDate(Date date) {
 
         RefinancingRate rate = null;

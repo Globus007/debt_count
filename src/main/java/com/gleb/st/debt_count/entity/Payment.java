@@ -7,7 +7,7 @@ public class Payment {
     private int id;
     private Date date;
     private double amount;
-    private int billId;
+    private int contractId;
 
     public Payment() {}
 
@@ -16,8 +16,8 @@ public class Payment {
         this.amount = amount;
     }
 
-    public Payment(int billId) {
-        this.billId = billId;
+    public Payment(int contractId) {
+        this.contractId = contractId;
     }
 
     public int getId() {
@@ -44,12 +44,12 @@ public class Payment {
         this.amount = amount;
     }
 
-    public int getBillId() {
-        return billId;
+    public int getContractId() {
+        return contractId;
     }
 
-    public void setBillId(int billId) {
-        this.billId = billId;
+    public void setContractId(int contractId) {
+        this.contractId = contractId;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class Payment {
                 "id=" + id +
                 ", date=" + date +
                 ", amount=" + amount +
-                ", billId=" + billId +
+                ", contractId=" + contractId +
                 '}';
     }
 }

@@ -1,7 +1,7 @@
 package com.gleb.st.debt_count.component;
 
-import com.gleb.st.debt_count.component.refinancing_rate.RefinancingRate;
-import com.gleb.st.debt_count.component.refinancing_rate.RefinancingRateJsonReader;
+import com.gleb.st.debt_count.component.refinancing.rate.RefinancingRate;
+import com.gleb.st.debt_count.component.refinancing.rate.reader.RefinancingRateReader;
 import com.gleb.st.debt_count.entity.Bill;
 import com.gleb.st.debt_count.entity.Debt;
 import com.gleb.st.debt_count.entity.Payment;
@@ -19,18 +19,20 @@ public class DebtCalculator {
     // todo: inject from property file
     private static final String DECIMAL_FORMAT = "#0.00";
 
+    private final RefinancingRateReader refinancingRateReader;
+
     @Autowired
-    private RefinancingRateJsonReader refinancingRateJsonReader;
+    public DebtCalculator(RefinancingRateReader refinancingRateReader) {
+        this.refinancingRateReader = refinancingRateReader;
+    }
 
     public double calculatePenalty(Bill bill, Debt debt) {
 
-        // считаем дни просрочки
+        // дни просрочки
         long delayPeriod = countDelayPeriod(bill.getPayDate(), debt.getCalculationDate());
 
-        // считаем пеню по формуле : Пеня = долг * ставка * дни просрочки
-        double penalty = bill.getAmount() * (debt.getPercent() / 100) * delayPeriod;
-
-        return penalty;
+        // Пеня = долг * ставка * дни просрочки
+        return bill.getAmount() * (debt.getPercent() / 100) * delayPeriod;
     }
 
     public double calculatePenalty(Bill bill, Debt debt, Payment payment) {
@@ -51,14 +53,14 @@ public class DebtCalculator {
 
     public double calculatePercent(Bill bill, Debt debt) {
 
-        RefinancingRate refinancingRate = refinancingRateJsonReader.getRefinancingRareOnDate(debt.getCalculationDate());
+        // ставка рефинансирования на дату рассчета
+        RefinancingRate rate = refinancingRateReader.getRefinancingRareOnDate(debt.getCalculationDate());
 
+        // дни просрочки
         long delayPeriod = countDelayPeriod(bill.getPayDate(), debt.getCalculationDate());
 
-        //Проценты = долг * ставка нбрб / годовых т.е /365 * дни
-        double debtPercent = bill.getAmount() * refinancingRate.getValue() / 365 * delayPeriod;
-
-        return debtPercent;
+        // Проценты = долг * ставка нбрб годовых/100 /365 * дни
+        return bill.getAmount() * rate.getValue() / 365 * delayPeriod / 100;
     }
 
     public double calculatePercent(Bill bill, Debt debt, Payment payment) {
@@ -67,14 +69,14 @@ public class DebtCalculator {
         //        сумму частичной оплаты * ставку на день частичной оплаты /365 * дни просрочки
         //        (с первого дня просрочки по день частичной оплаты)
         RefinancingRate refinancingRateOnPaymentDate =
-                refinancingRateJsonReader.getRefinancingRareOnDate(payment.getDate());
+                refinancingRateReader.getRefinancingRareOnDate(payment.getDate());
         long delayPeriodBeforePayment = countDelayPeriod(bill.getPayDate(), payment.getDate());
         double debtPercentBeforePayment = payment.getAmount()
                 * refinancingRateOnPaymentDate.getValue() / 365
                 * delayPeriodBeforePayment;
 
         RefinancingRate refinancingRateOnCalculationDate =
-                refinancingRateJsonReader.getRefinancingRareOnDate(debt.getCalculationDate());
+                refinancingRateReader.getRefinancingRareOnDate(debt.getCalculationDate());
         long delayPeriodAfterPayment = countDelayPeriod(payment.getDate(), debt.getCalculationDate());
         double debtAfterPayment = bill.getAmount() - payment.getAmount();
         double debtPercentAfterPayment = payment.getAmount()
@@ -91,8 +93,7 @@ public class DebtCalculator {
         LocalDate payDate = LocalDate.parse(dateFrom.toString());
         LocalDate calculationDate = LocalDate.parse(DateTo.toString());
 
-        return DAYS.between(payDate, calculationDate);
+        // last day included
+        return DAYS.between(payDate, calculationDate) + 1;
     }
-
-
 }
