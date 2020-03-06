@@ -1,6 +1,6 @@
 package com.gleb.st.debt_count.component.refinancing.rate.reader;
 
-import com.gleb.st.debt_count.component.refinancing.rate.RefinancingRate;
+import com.gleb.st.debt_count.entity.RefinancingRate;
 
 import java.sql.Date;
 

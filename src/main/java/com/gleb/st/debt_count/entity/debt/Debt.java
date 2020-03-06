@@ -1,8 +1,7 @@
-package com.gleb.st.debt_count.entity;
+package com.gleb.st.debt_count.entity.debt;
 
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
 import java.sql.Date;
 
 @Component

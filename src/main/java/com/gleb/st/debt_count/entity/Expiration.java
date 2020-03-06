@@ -1,4 +1,4 @@
-package com.gleb.st.debt_count.component.expiration;
+package com.gleb.st.debt_count.entity;
 
 import org.springframework.stereotype.Component;
 

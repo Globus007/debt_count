@@ -1,8 +1,8 @@
 package com.gleb.st.debt_count.component.calculator;
 
-import com.gleb.st.debt_count.component.expiration.Expiration;
+import com.gleb.st.debt_count.entity.Expiration;
 import com.gleb.st.debt_count.component.expiration.counter.ExpirationCounter;
-import com.gleb.st.debt_count.component.refinancing.rate.RefinancingRate;
+import com.gleb.st.debt_count.entity.RefinancingRate;
 import com.gleb.st.debt_count.component.refinancing.rate.reader.RefinancingRateReader;
 import com.gleb.st.debt_count.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;

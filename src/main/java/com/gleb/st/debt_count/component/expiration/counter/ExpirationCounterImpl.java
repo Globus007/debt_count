@@ -1,6 +1,6 @@
 package com.gleb.st.debt_count.component.expiration.counter;
 
-import com.gleb.st.debt_count.component.expiration.Expiration;
+import com.gleb.st.debt_count.entity.Expiration;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;

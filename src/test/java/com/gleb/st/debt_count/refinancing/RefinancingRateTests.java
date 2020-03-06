@@ -1,6 +1,6 @@
 package com.gleb.st.debt_count.refinancing;
 
-import com.gleb.st.debt_count.component.refinancing.rate.RefinancingRate;
+import com.gleb.st.debt_count.entity.RefinancingRate;
 import com.gleb.st.debt_count.component.refinancing.rate.reader.RefinancingRateReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

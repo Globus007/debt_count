@@ -1,9 +1,9 @@
 package com.gleb.st.debt_count.component;
 
-import com.gleb.st.debt_count.component.refinancing.rate.RefinancingRate;
+import com.gleb.st.debt_count.entity.RefinancingRate;
 import com.gleb.st.debt_count.component.refinancing.rate.reader.RefinancingRateReader;
 import com.gleb.st.debt_count.entity.Bill;
-import com.gleb.st.debt_count.entity.Debt;
+import com.gleb.st.debt_count.entity.debt.Debt;
 import com.gleb.st.debt_count.entity.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

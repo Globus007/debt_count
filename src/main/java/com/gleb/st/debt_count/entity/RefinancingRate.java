@@ -1,11 +1,9 @@
-package com.gleb.st.debt_count.component.refinancing.rate;
+package com.gleb.st.debt_count.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 
-@Component
 public class RefinancingRate {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd't'HH:mm:ss")

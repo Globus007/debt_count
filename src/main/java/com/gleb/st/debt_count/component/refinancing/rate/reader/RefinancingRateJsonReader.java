@@ -1,7 +1,7 @@
 package com.gleb.st.debt_count.component.refinancing.rate.reader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gleb.st.debt_count.component.refinancing.rate.RefinancingRate;
+import com.gleb.st.debt_count.entity.RefinancingRate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
