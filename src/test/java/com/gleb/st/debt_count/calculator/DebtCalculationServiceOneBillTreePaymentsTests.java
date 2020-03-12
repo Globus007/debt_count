@@ -1,10 +1,11 @@
 package com.gleb.st.debt_count.calculator;
 
-import com.gleb.st.debt_count.component.calculator.DebtCalculator;
-import com.gleb.st.debt_count.entity.Bill;
-import com.gleb.st.debt_count.entity.Calculation;
-import com.gleb.st.debt_count.entity.Contract;
-import com.gleb.st.debt_count.entity.Payment;
+import com.gleb.st.debt_count.entity.debtor.Bill;
+import com.gleb.st.debt_count.entity.calculation.Calculation;
+import com.gleb.st.debt_count.entity.calculation.CalculationData;
+import com.gleb.st.debt_count.entity.debtor.Contract;
+import com.gleb.st.debt_count.entity.debtor.Payment;
+import com.gleb.st.debt_count.service.calculator.DebtCalculationService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
-public class DebtCalculatorOneBillTreePaymentsTests {
+public class DebtCalculationServiceOneBillTreePaymentsTests {
 
     @Autowired
-    private DebtCalculator calculator;
+    private DebtCalculationService calculator;
 
     private Calculation calculation;
 
@@ -57,14 +58,26 @@ public class DebtCalculatorOneBillTreePaymentsTests {
      */
 
     private Calculation processCalculation() {
-        Contract contract = new Contract("test", 0.15, Date.valueOf("2019-09-16"));
-        Bill bill = new Bill("1038486", Date.valueOf("2019-05-13"), 10_606.31, Date.valueOf("2019-05-28"));
+        CalculationData calculationData = new CalculationData();
+
+        calculationData.setContract(
+                new Contract("123", Date.valueOf("2019-09-16"), Date.valueOf("2019-05-28"), 0.15)
+        );
+
+        List<Bill> bills = new ArrayList<>();
+        bills.add(new Bill("1038486", Date.valueOf("2019-05-13"), 10_606.31));
+        calculationData.setBills(bills);
+
         List<Payment> payments = new ArrayList<>();
         payments.add(new Payment(Date.valueOf("2019-06-28"), 1_000.00));
         payments.add(new Payment(Date.valueOf("2019-07-26"), 500.00));
         payments.add(new Payment(Date.valueOf("2019-08-13"), 500.00));
+        calculationData.setPayments(payments);
 
-        calculation = calculator.processCalculation(contract, bill, payments);
+        calculationData.setCalculationDate(Date.valueOf("2019-09-16"));
+
+
+        calculation = calculator.processCalculation(calculationData);
         return calculation;
     }
 

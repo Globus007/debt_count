@@ -1,16 +1,11 @@
-package com.gleb.st.debt_count.entity;
+package com.gleb.st.debt_count.entity.calculation;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class Calculation {
 
-    private int id;
     private double debt;
     private double fine;
     private double percent;
     private double fullDebt;
-    private int contractId;
 
     public Calculation() {}
 
@@ -19,14 +14,6 @@ public class Calculation {
         this.fine = fine;
         this.percent = percent;
         fullDebt = debt + fine + percent;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public double getDebt() {
@@ -61,23 +48,13 @@ public class Calculation {
         this.fullDebt = fullDebt;
     }
 
-    public int getContractId() {
-        return contractId;
-    }
-
-    public void setContractId(int contractId) {
-        this.contractId = contractId;
-    }
-
     @Override
     public String toString() {
         return "Calculation{" +
-                "id=" + id +
                 ", debt=" + debt +
                 ", fine=" + fine +
                 ", percent=" + percent +
                 ", fullDebt=" + fullDebt +
-                ", contractId=" + contractId +
                 '}';
     }
 }

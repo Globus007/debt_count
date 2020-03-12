@@ -1,4 +1,4 @@
-package com.gleb.st.debt_count.entity;
+package com.gleb.st.debt_count.entity.calculation;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

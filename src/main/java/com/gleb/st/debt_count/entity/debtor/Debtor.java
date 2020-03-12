@@ -1,16 +1,16 @@
-package com.gleb.st.debt_count.entity.debt;
+package com.gleb.st.debt_count.entity.debtor;
 
 public class Debtor {
 
     private int id;
     private String name;
-    private String address;
+    private String props;
 
     public Debtor() {}
 
     public Debtor(String name, String address) {
         this.name = name;
-        this.address = address;
+        this.props = address;
     }
 
     public int getId() {
@@ -29,12 +29,12 @@ public class Debtor {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getProps() {
+        return props;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setProps(String props) {
+        this.props = props;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Debtor {
         return "Debtor{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
+                ", props='" + props + '\'' +
                 '}';
     }
 }
