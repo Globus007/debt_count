@@ -16,14 +16,14 @@ public class DebtCalculationServiceImpl implements DebtCalculationService {
     @Override
     public Calculation processCalculation(CalculationData calculationData) {
 
-        DebtCalculator calculator;
+        DebtCalculator debtCalculator;
 
         if (calculationData.getPayments().isEmpty()) {
-            calculator =  debtCalculationFactory.getDebtCalculatorOneBillNoPayments(calculationData);
+            debtCalculator =  debtCalculationFactory.getDebtCalculatorOneBillNoPayments(calculationData);
         } else {
-            calculator = debtCalculationFactory.getDebtCalculatorOneBillHasPayments(calculationData);
+            debtCalculator = debtCalculationFactory.getDebtCalculatorOneBillHasPayments(calculationData);
         }
 
-        return calculator.processCalculation();
+        return debtCalculator.processCalculation();
     }
 }
