@@ -4,10 +4,12 @@ import com.gleb.st.debt_count.entity.debtor.Contract;
 import com.gleb.st.debt_count.entity.debtor.Payment;
 import com.gleb.st.debt_count.entity.debtor.Bill;
 import com.gleb.st.debt_count.entity.debtor.Debtor;
+import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.util.List;
 
+@Component
 public class CalculationData {
 
     private Debtor debtor;

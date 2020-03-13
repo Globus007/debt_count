@@ -23,6 +23,11 @@ public abstract class DebtCalculator {
         this.calculationData = calculationData;
     }
 
+    public DebtCalculator setCalculationData(CalculationData calculationData) {
+        this.calculationData = calculationData;
+        return this;
+    }
+
     public abstract Calculation processCalculation();
 
     protected double calculateFine(double amount, double percent, long delayPeriod) {
