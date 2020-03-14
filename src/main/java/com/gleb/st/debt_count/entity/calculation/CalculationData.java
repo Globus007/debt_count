@@ -7,6 +7,7 @@ import com.gleb.st.debt_count.entity.debtor.Debtor;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.util.Comparator;
 import java.util.List;
 
 @Component
@@ -50,6 +51,9 @@ public class CalculationData {
     }
 
     public void setPayments(List<Payment> payments) {
+        if (payments != null) {
+            payments.sort(Comparator.comparing(Payment::getDate));
+        }
         this.payments = payments;
     }
 

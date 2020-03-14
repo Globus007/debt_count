@@ -7,6 +7,8 @@ import com.gleb.st.debt_count.entity.calculation.Expiration;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class DebtCalculatorOneBillNoPayments extends DebtCalculator {
@@ -20,16 +22,48 @@ public class DebtCalculatorOneBillNoPayments extends DebtCalculator {
 
         Bill bill = calculationData.getBills().get(0);
         Date calculationDate = calculationData.getCalculationDate();
+        List<String> calculationInfo = new ArrayList<>();
+        StringBuilder info = new StringBuilder();
 
         // todo: contract may be null. Then paymentDate = 2 days after bill date
         Date paymentDate = calculationData.getContract().getPaymentDate();
         double contractFine = calculationData.getContract().getFine();
 
         Expiration expiration = expirationCounter.calculateExpiration(paymentDate, calculationDate);
+        info.append(String.format("C %tF по %tF - %d дня просрочки\n",
+                paymentDate,
+                calculationDate,
+                expiration.getValue()));
 
-        double fine = calculateFine(bill.getAmount(), contractFine, expiration.getValue());
-        double percent = calculatePercent(bill.getAmount(), calculationDate, expiration.getValue());
+        double fine = calculateFine(
+                bill.getAmount(),
+                contractFine,
+                expiration.getValue());
+        info.append(String.format("Пеня = %.2f х %.2f%% х %d = %.2f руб.\n",
+                bill.getAmount(),
+                contractFine/100,
+                expiration.getValue(),
+                fine));
 
-        return new Calculation(bill.getAmount(), fine, percent);
+        double percent = calculatePercent(
+                bill.getAmount(),
+                calculationDate,
+                expiration.getValue());
+        info.append(String.format("Проценты = %.2f х %.2f%% х %d /365 = %.2f руб.\n",
+                bill.getAmount(),
+                //todo: refactor code: Refinancing Rate should call once
+                refinancingRateReader.getRefinancingRateOnDate(calculationData.getCalculationDate()).getValue(),
+                expiration.getValue(),
+                percent));
+
+        info = new StringBuilder();
+        info.append(String.format("Итого задолженность составляет %.2f белорусских рублей:\n",
+                bill.getAmount() + percent + fine));
+        info.append(String.format("долг в размере %.2f руб.\n", bill.getAmount()));
+        info.append(String.format("пеня в размере %.2f руб.\n", fine));
+        info.append(String.format("проценты в размере %.2f руб.\n", percent));
+        calculationInfo.add(info.toString());
+
+        return new Calculation(bill.getAmount(), fine, percent, calculationInfo);
     }
 }

@@ -37,7 +37,7 @@ public abstract class DebtCalculator {
 
     protected double calculatePercent(double amount, Date calculationDate, long delayPeriod) {
         // ставка рефинансирования на дату рассчета
-        RefinancingRate rate = refinancingRateReader.getRefinancingRareOnDate(calculationDate);
+        RefinancingRate rate = refinancingRateReader.getRefinancingRateOnDate(calculationDate);
         // Проценты = долг * ставка нбрб/100 * дни/365
         return amount * (rate.getValue() / 100) * ((double) delayPeriod / 365);
     }

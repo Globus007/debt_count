@@ -21,7 +21,7 @@ public class RefinancingRateJsonReader implements RefinancingRateReader {
     private final static Logger log = Logger.getLogger(RefinancingRateJsonReader.class.getName());
 
     @Override
-    public RefinancingRate getRefinancingRareOnDate(Date date) {
+    public RefinancingRate getRefinancingRateOnDate(Date date) {
 
         RefinancingRate rate = null;
         RefinancingRate[] refinancingRates;

@@ -1,19 +1,31 @@
 package com.gleb.st.debt_count.entity.calculation;
 
+import java.util.List;
+
 public class Calculation {
 
     private double debt;
     private double fine;
     private double percent;
     private double fullDebt;
+    private List<String> calculatingInfo;
 
     public Calculation() {}
 
-    public Calculation(double debt, double fine, double percent) {
+    public Calculation(double debt, double fine, double percent, List<String> calculatingInfo) {
         this.debt = debt;
         this.fine = fine;
         this.percent = percent;
+        this.calculatingInfo = calculatingInfo;
         fullDebt = debt + fine + percent;
+    }
+
+    public List<String> getCalculatingInfo() {
+        return calculatingInfo;
+    }
+
+    public void setCalculatingInfo(List<String> calculatingInfo) {
+        this.calculatingInfo = calculatingInfo;
     }
 
     public double getDebt() {
@@ -51,10 +63,11 @@ public class Calculation {
     @Override
     public String toString() {
         return "Calculation{" +
-                ", debt=" + debt +
+                "debt=" + debt +
                 ", fine=" + fine +
                 ", percent=" + percent +
                 ", fullDebt=" + fullDebt +
+                ", calculatingInfo=" + calculatingInfo +
                 '}';
     }
 }
