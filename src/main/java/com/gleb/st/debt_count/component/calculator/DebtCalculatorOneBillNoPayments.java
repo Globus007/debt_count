@@ -57,6 +57,7 @@ public class DebtCalculatorOneBillNoPayments extends DebtCalculator {
                 refinancingRate,
                 expiration.getValue(),
                 percent));
+        calculationInfo.add(info.toString());
 
         info = new StringBuilder();
         info.append(String.format("Итого задолженность составляет %.2f белорусских рублей:\n",
