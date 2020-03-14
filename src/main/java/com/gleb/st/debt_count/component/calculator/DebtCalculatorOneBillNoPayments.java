@@ -45,14 +45,16 @@ public class DebtCalculatorOneBillNoPayments extends DebtCalculator {
                 expiration.getValue(),
                 fine));
 
+        double refinancingRate = refinancingRateReader.
+                getRefinancingRateOnDate(calculationDate)
+                .getValue();
         double percent = calculatePercent(
                 bill.getAmount(),
-                calculationDate,
+                refinancingRate,
                 expiration.getValue());
         info.append(String.format("Проценты = %.2f х %.2f%% х %d /365 = %.2f руб.\n",
                 bill.getAmount(),
-                //todo: refactor code: Refinancing Rate should call once
-                refinancingRateReader.getRefinancingRateOnDate(calculationData.getCalculationDate()).getValue(),
+                refinancingRate,
                 expiration.getValue(),
                 percent));
 

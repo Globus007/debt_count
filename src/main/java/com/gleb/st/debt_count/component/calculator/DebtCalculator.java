@@ -42,6 +42,11 @@ public abstract class DebtCalculator {
         return amount * (rate.getValue() / 100) * ((double) delayPeriod / 365);
     }
 
+    protected double calculatePercent(double amount, double refinancingRate, long delayPeriod) {
+        // Проценты = долг * ставка нбрб/100 * дни/365
+        return amount * (refinancingRate / 100) * ((double) delayPeriod / 365);
+    }
+
     protected Date getNextDay(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

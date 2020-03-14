@@ -22,7 +22,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
 
         double debt = calculationData.getBills().get(0).getAmount();
 
-        double fine = 0, percent = 0;
+        double fine = 0, percent = 0, refinancingRate;
         double contractFine = calculationData.getContract().getFine();
 
         // todo: contract may be null. Then paymentDate = 2 days after bill date
@@ -59,14 +59,14 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                     calculationData.getContract().getPaymentDate(),
                     payment.getDate(),
                     expiration.getValue()));
+            refinancingRate = refinancingRateReader.getRefinancingRateOnDate(payment.getDate()).getValue();
             percent += calculatePercent(
                     payment.getAmount(),
-                    payment.getDate(),
+                    refinancingRate,
                     expiration.getValue());
             info.append(String.format("Проценты = %.2f х %.2f%% х %d /365 = %.2f руб.\n",
                     payment.getAmount(),
-                    //todo: refactor code: Refinancing Rate should call once
-                    refinancingRateReader.getRefinancingRateOnDate(payment.getDate()).getValue(),
+                    refinancingRate,
                     expiration.getValue(),
                     percent));
 
@@ -101,14 +101,16 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                 calculationData.getContract().getPaymentDate(),
                 calculationData.getCalculationDate(),
                 expiration.getValue()));
+        refinancingRate = refinancingRateReader.
+                getRefinancingRateOnDate(calculationData.getCalculationDate())
+                .getValue();
         percent += calculatePercent(
                 debt,
-                calculationData.getCalculationDate(),
+                refinancingRate,
                 expiration.getValue());
         info.append(String.format("Проценты = %.2f х %.2f%% х %d /365 = %.2f руб.\n",
                 debt,
-                //todo: refactor code: Refinancing Rate should call once
-                refinancingRateReader.getRefinancingRateOnDate(calculationData.getCalculationDate()).getValue(),
+                refinancingRate,
                 expiration.getValue(),
                 percent));
 
