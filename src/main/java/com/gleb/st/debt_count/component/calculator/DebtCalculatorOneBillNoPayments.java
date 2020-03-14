@@ -63,7 +63,7 @@ public class DebtCalculatorOneBillNoPayments extends DebtCalculator {
                 bill.getAmount() + percent + fine));
         info.append(String.format("долг в размере %.2f руб.\n", bill.getAmount()));
         info.append(String.format("пеня в размере %.2f руб.\n", fine));
-        info.append(String.format("проценты в размере %.2f руб.\n", percent));
+        info.append(String.format("проценты в размере %.2f руб.", percent));
         calculationInfo.add(info.toString());
 
         return new Calculation(bill.getAmount(), fine, percent, calculationInfo);

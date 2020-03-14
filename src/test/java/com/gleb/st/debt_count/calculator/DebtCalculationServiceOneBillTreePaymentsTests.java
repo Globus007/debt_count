@@ -6,10 +6,12 @@ import com.gleb.st.debt_count.entity.calculation.CalculationData;
 import com.gleb.st.debt_count.entity.debtor.Contract;
 import com.gleb.st.debt_count.entity.debtor.Payment;
 import com.gleb.st.debt_count.service.calculator.DebtCalculationService;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -52,9 +54,9 @@ public class DebtCalculationServiceOneBillTreePaymentsTests {
         Проценты = 8 606,31 х 9.5 % х 112 /365 = 250,88 руб.
 
         Итого задолженность составляет 10482.22 белорусских рублей:
-        	долг в размере 8 606,31 руб.
-        	пеня в размере 1 597,36 руб.
-        	проценты в размере 278.55 руб.
+        долг в размере 8 606,31 руб.
+        пеня в размере 1 597,36 руб.
+        проценты в размере 278.55 руб.
      */
 
     private Calculation processCalculation() {
@@ -84,24 +86,44 @@ public class DebtCalculationServiceOneBillTreePaymentsTests {
     @Test
     public void calculationFullDebtTest() {
         Calculation calculation = processCalculation();
-        Assertions.assertEquals(calculation.getFullDebt(), 10_482.22, 0.01);
+        Assertions.assertEquals(10_482.22, calculation.getFullDebt(), 0.01);
     }
 
     @Test
     public void calculationDebtTest() {
         Calculation calculation = processCalculation();
-        Assertions.assertEquals(calculation.getDebt(), 8_606.31, 0.01);
+        Assertions.assertEquals(8_606.31, calculation.getDebt(), 0.01);
     }
 
     @Test
     public void calculationFineTest() {
         Calculation calculation = processCalculation();
-        Assertions.assertEquals(calculation.getFine(), 1_597.36, 0.01);
+        Assertions.assertEquals(1_597.36, calculation.getFine(), 0.01);
     }
 
     @Test
     public void calculationPercentTest() {
         Calculation calculation = processCalculation();
-        Assertions.assertEquals(calculation.getPercent(), 278.55, 0.01);
+        Assertions.assertEquals(278.55, calculation.getPercent(), 0.01);
+    }
+
+    @Test
+    public void finalCalculationInfoTest() {
+        Calculation calculation = processCalculation();
+        String firstInfo = calculation.getCalculatingInfo().get(0);
+        Assertions.assertEquals("ТТН № 1038486 от 2019-05-13 на сумму 10606,31 руб.", firstInfo);
+    }
+
+    @Test
+    public void firstCalculationInfoTest() {
+        Calculation calculation = processCalculation();
+        int size = calculation.getCalculatingInfo().size();
+        String lastInfo = calculation.getCalculatingInfo().get(size-1);
+        Assertions.assertEquals(
+                "Итого задолженность составляет 10482,22 белорусских рублей:\n" +
+                "долг в размере 8606,31 руб.\n" +
+                "пеня в размере 1597,36 руб.\n" +
+                "проценты в размере 278,55 руб.",
+                lastInfo);
     }
 }
