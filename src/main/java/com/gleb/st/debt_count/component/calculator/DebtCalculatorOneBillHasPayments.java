@@ -26,7 +26,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
         double contractFine = calculationData.getContract().getFine();
         // todo: contract may be null. Then paymentDate = 2 days after bill date
         Date startCountDate = calculationData.getContract().getPaymentDate();
-        double fine = 0, percent = 0, refinancingRate;
+        double totalFine = 0, totalPercent = 0, refinancingRate, fine, percent;
         List<String> calculationInfo = new ArrayList<>();
         Expiration expiration;
 
@@ -49,7 +49,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                     startCountDate,
                     payment.getDate(),
                     expiration.getValue()));
-            fine += calculateFine(
+            fine = calculateFine(
                     debt,
                     contractFine,
                     expiration.getValue());
@@ -58,6 +58,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                     contractFine/100,
                     expiration.getValue(),
                     fine));
+            totalFine += fine;
 
             expiration = expirationCounter.calculateExpiration(
                     calculationData.getContract().getPaymentDate(),
@@ -67,7 +68,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                     payment.getDate(),
                     expiration.getValue()));
             refinancingRate = refinancingRateReader.getRefinancingRateOnDate(payment.getDate()).getValue();
-            percent += calculatePercent(
+            percent = calculatePercent(
                     payment.getAmount(),
                     refinancingRate,
                     expiration.getValue());
@@ -76,6 +77,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                     refinancingRate,
                     expiration.getValue(),
                     percent));
+            totalPercent += percent;
 
             debt -= payment.getAmount();
             info.append(String.format("Долг = %.2f руб.", debt));
@@ -91,7 +93,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                 startCountDate,
                 calculationData.getCalculationDate(),
                 expiration.getValue()));
-        fine += calculateFine(
+        totalFine += calculateFine(
                 debt,
                 contractFine,
                 expiration.getValue());
@@ -99,7 +101,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                 debt,
                 contractFine/100,
                 expiration.getValue(),
-                fine));
+                totalFine));
 
         expiration = expirationCounter.calculateExpiration(
                 calculationData.getContract().getPaymentDate(),
@@ -111,7 +113,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
         refinancingRate = refinancingRateReader.
                 getRefinancingRateOnDate(calculationData.getCalculationDate())
                 .getValue();
-        percent += calculatePercent(
+        percent = calculatePercent(
                 debt,
                 refinancingRate,
                 expiration.getValue());
@@ -120,18 +122,19 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                 refinancingRate,
                 expiration.getValue(),
                 percent));
+        totalPercent += percent;
 
         calculationInfo.add(info.toString());
 
         info = new StringBuilder();
         info.append(String.format("Итого задолженность составляет %.2f белорусских рублей:\n",
-                debt + percent + fine));
+                debt + totalPercent + totalFine));
         info.append(String.format("долг в размере %.2f руб.\n", debt));
-        info.append(String.format("пеня в размере %.2f руб.\n", fine));
-        info.append(String.format("проценты в размере %.2f руб.", percent));
+        info.append(String.format("пеня в размере %.2f руб.\n", totalFine));
+        info.append(String.format("проценты в размере %.2f руб.", totalPercent));
         calculationInfo.add(info.toString());
 
         // todo: Ставка пени может быть ограничена. Например ставка0.15% но не более 10% от долга
-        return new Calculation(debt, fine, percent, calculationInfo);
+        return new Calculation(debt, totalFine, totalPercent, calculationInfo);
     }
 }
