@@ -11,13 +11,6 @@ public class Contract {
 
     public Contract() {}
 
-    public Contract(String number, Date date, Date paymentDate, double fine) {
-        this.number = number;
-        this.date = date;
-        this.paymentDate = paymentDate;
-        this.fine = fine;
-    }
-
     public String getNumber() {
         return number;
     }

@@ -10,7 +10,7 @@ public class Bill {
     private Date date;
     private double amount;
     private List<Payment> payments;
-    private Date payDate;
+    private Date paymentDate;
 
     public Bill() {}
 
@@ -53,12 +53,12 @@ public class Bill {
         this.payments = payments;
     }
 
-    public Date getPayDate() {
-        return payDate;
+    public Date getPaymentDate() {
+        return paymentDate;
     }
 
-    public void setPayDate(Date payDate) {
-        this.payDate = payDate;
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
     @Override

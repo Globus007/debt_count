@@ -60,18 +60,22 @@ public class DebtCalculationServiceOneBillTreePaymentsTests {
     private Calculation processCalculation() {
         CalculationInputData calculationInputData = new CalculationInputData();
 
-        calculationInputData.setContract(
-                new Contract("123", Date.valueOf("2019-09-16"), Date.valueOf("2019-05-28"), 0.15)
-        );
+        Contract contract = new Contract();
+        contract.setFine(0.15);
+        calculationInputData.setContract(contract);
 
         List<Bill> bills = new ArrayList<>();
-        bills.add(new Bill("1038486", Date.valueOf("2019-05-13"), 10_606.31));
-        calculationInputData.setBills(bills);
-
         List<Payment> payments = new ArrayList<>();
         payments.add(new Payment(Date.valueOf("2019-06-28"), 1_000.00));
         payments.add(new Payment(Date.valueOf("2019-07-26"), 500.00));
         payments.add(new Payment(Date.valueOf("2019-08-13"), 500.00));
+
+        Bill bill = new Bill("1038486", Date.valueOf("2019-05-13"), 10_606.31);
+        bill.setPaymentDate(Date.valueOf("2019-05-28"));
+        bill.getPayments().addAll(payments);
+        bills.add(bill);
+        calculationInputData.setBills(bills);
+
         calculationInputData.setPayments(payments);
 
         calculationInputData.setCalculationDate(Date.valueOf("2019-09-16"));

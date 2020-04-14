@@ -25,7 +25,6 @@ public class DebtCalculatorOneBillNoPayments extends DebtCalculator {
         List<String> calculationInfo = new ArrayList<>();
         StringBuilder info = new StringBuilder();
 
-        // todo: contract may be null. Then paymentDate = 2 days after bill date
         Date paymentDate = calculationInputData.getContract().getPaymentDate();
         double contractFine = calculationInputData.getContract().getFine();
 
