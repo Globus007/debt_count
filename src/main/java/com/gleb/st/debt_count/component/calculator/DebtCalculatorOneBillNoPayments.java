@@ -2,7 +2,7 @@ package com.gleb.st.debt_count.component.calculator;
 
 import com.gleb.st.debt_count.entity.debtor.Bill;
 import com.gleb.st.debt_count.entity.calculation.Calculation;
-import com.gleb.st.debt_count.entity.calculation.CalculationData;
+import com.gleb.st.debt_count.entity.calculation.CalculationInputData;
 import com.gleb.st.debt_count.entity.calculation.Expiration;
 import org.springframework.stereotype.Component;
 
@@ -13,21 +13,21 @@ import java.util.List;
 @Component
 public class DebtCalculatorOneBillNoPayments extends DebtCalculator {
 
-    public DebtCalculatorOneBillNoPayments(CalculationData calculationData) {
-        super(calculationData);
+    public DebtCalculatorOneBillNoPayments(CalculationInputData calculationInputData) {
+        super(calculationInputData);
     }
 
     @Override
     public Calculation processCalculation() {
 
-        Bill bill = calculationData.getBills().get(0);
-        Date calculationDate = calculationData.getCalculationDate();
+        Bill bill = calculationInputData.getBills().get(0);
+        Date calculationDate = calculationInputData.getCalculationDate();
         List<String> calculationInfo = new ArrayList<>();
         StringBuilder info = new StringBuilder();
 
         // todo: contract may be null. Then paymentDate = 2 days after bill date
-        Date paymentDate = calculationData.getContract().getPaymentDate();
-        double contractFine = calculationData.getContract().getFine();
+        Date paymentDate = calculationInputData.getContract().getPaymentDate();
+        double contractFine = calculationInputData.getContract().getFine();
 
         Expiration expiration = expirationCounter.calculateExpiration(paymentDate, calculationDate);
         info.append(String.format("C %tF по %tF - %d дня просрочки\n",

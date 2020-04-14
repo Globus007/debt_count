@@ -3,7 +3,7 @@ package com.gleb.st.debt_count.component.calculator;
 import com.gleb.st.debt_count.component.expiration.counter.ExpirationCounter;
 import com.gleb.st.debt_count.component.refinancing.rate.reader.RefinancingRateReader;
 import com.gleb.st.debt_count.entity.calculation.Calculation;
-import com.gleb.st.debt_count.entity.calculation.CalculationData;
+import com.gleb.st.debt_count.entity.calculation.CalculationInputData;
 import com.gleb.st.debt_count.entity.calculation.RefinancingRate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,14 +17,14 @@ public abstract class DebtCalculator {
     @Autowired
     protected ExpirationCounter expirationCounter;
 
-    protected CalculationData calculationData;
+    protected CalculationInputData calculationInputData;
 
-    public DebtCalculator(CalculationData calculationData) {
-        this.calculationData = calculationData;
+    public DebtCalculator(CalculationInputData calculationInputData) {
+        this.calculationInputData = calculationInputData;
     }
 
-    public DebtCalculator setCalculationData(CalculationData calculationData) {
-        this.calculationData = calculationData;
+    public DebtCalculator setCalculationInputData(CalculationInputData calculationInputData) {
+        this.calculationInputData = calculationInputData;
         return this;
     }
 

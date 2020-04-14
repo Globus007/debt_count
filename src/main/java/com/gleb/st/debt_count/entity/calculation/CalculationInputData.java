@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @Component
-public class CalculationData {
+public class CalculationInputData {
 
     private Debtor debtor;
     private Contract contract;
@@ -20,7 +20,7 @@ public class CalculationData {
     private Date calculationDate;
     private double totalBalance;
 
-    public CalculationData() {}
+    public CalculationInputData() {}
 
     public Debtor getDebtor() {
         return debtor;

@@ -2,16 +2,14 @@ package com.gleb.st.debt_count.calculator;
 
 import com.gleb.st.debt_count.entity.debtor.Bill;
 import com.gleb.st.debt_count.entity.calculation.Calculation;
-import com.gleb.st.debt_count.entity.calculation.CalculationData;
+import com.gleb.st.debt_count.entity.calculation.CalculationInputData;
 import com.gleb.st.debt_count.entity.debtor.Contract;
 import com.gleb.st.debt_count.entity.debtor.Payment;
 import com.gleb.st.debt_count.service.calculator.DebtCalculationService;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -60,26 +58,26 @@ public class DebtCalculationServiceOneBillTreePaymentsTests {
      */
 
     private Calculation processCalculation() {
-        CalculationData calculationData = new CalculationData();
+        CalculationInputData calculationInputData = new CalculationInputData();
 
-        calculationData.setContract(
+        calculationInputData.setContract(
                 new Contract("123", Date.valueOf("2019-09-16"), Date.valueOf("2019-05-28"), 0.15)
         );
 
         List<Bill> bills = new ArrayList<>();
         bills.add(new Bill("1038486", Date.valueOf("2019-05-13"), 10_606.31));
-        calculationData.setBills(bills);
+        calculationInputData.setBills(bills);
 
         List<Payment> payments = new ArrayList<>();
         payments.add(new Payment(Date.valueOf("2019-06-28"), 1_000.00));
         payments.add(new Payment(Date.valueOf("2019-07-26"), 500.00));
         payments.add(new Payment(Date.valueOf("2019-08-13"), 500.00));
-        calculationData.setPayments(payments);
+        calculationInputData.setPayments(payments);
 
-        calculationData.setCalculationDate(Date.valueOf("2019-09-16"));
+        calculationInputData.setCalculationDate(Date.valueOf("2019-09-16"));
 
 
-        calculation = calculator.processCalculation(calculationData);
+        calculation = calculator.processCalculation(calculationInputData);
         return calculation;
     }
 

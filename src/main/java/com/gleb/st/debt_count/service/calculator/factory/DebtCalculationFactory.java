@@ -3,7 +3,7 @@ package com.gleb.st.debt_count.service.calculator.factory;
 import com.gleb.st.debt_count.component.calculator.DebtCalculator;
 import com.gleb.st.debt_count.component.calculator.DebtCalculatorOneBillHasPayments;
 import com.gleb.st.debt_count.component.calculator.DebtCalculatorOneBillNoPayments;
-import com.gleb.st.debt_count.entity.calculation.CalculationData;
+import com.gleb.st.debt_count.entity.calculation.CalculationInputData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +15,11 @@ public class DebtCalculationFactory {
     @Autowired
     private DebtCalculatorOneBillNoPayments debtCalculatorOneBillNoPayments;
 
-    public DebtCalculator getDebtCalculatorOneBillHasPayments(CalculationData calculationData) {
-        return debtCalculatorOneBillHasPayments.setCalculationData(calculationData);
+    public DebtCalculator getDebtCalculatorOneBillHasPayments(CalculationInputData calculationInputData) {
+        return debtCalculatorOneBillHasPayments.setCalculationInputData(calculationInputData);
     }
 
-    public DebtCalculator getDebtCalculatorOneBillNoPayments(CalculationData calculationData) {
-        return debtCalculatorOneBillNoPayments.setCalculationData(calculationData);
+    public DebtCalculator getDebtCalculatorOneBillNoPayments(CalculationInputData calculationInputData) {
+        return debtCalculatorOneBillNoPayments.setCalculationInputData(calculationInputData);
     }
 }
