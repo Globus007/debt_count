@@ -1,12 +1,16 @@
 package com.gleb.st.debt_count.entity.debtor;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bill {
 
     private String number;
     private Date date;
     private double amount;
+    private List<Payment> payments;
+    private Date payDate;
 
     public Bill() {}
 
@@ -14,6 +18,7 @@ public class Bill {
         this.number = number;
         this.date = date;
         this.amount = amount;
+        payments = new ArrayList<>();
     }
 
     public String getNumber() {
@@ -38,6 +43,22 @@ public class Bill {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
+
+    public Date getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
     }
 
     @Override
