@@ -72,11 +72,9 @@ public class DebtCalculationServiceOneBillTreePaymentsTests {
 
         Bill bill = new Bill("1038486", Date.valueOf("2019-05-13"), 10_606.31);
         bill.setPaymentDate(Date.valueOf("2019-05-28"));
-        bill.getPayments().addAll(payments);
+        bill.setPayments(payments);
         bills.add(bill);
         calculationInputData.setBills(bills);
-
-        calculationInputData.setPayments(payments);
 
         calculationInputData.setCalculationDate(Date.valueOf("2019-09-16"));
 
