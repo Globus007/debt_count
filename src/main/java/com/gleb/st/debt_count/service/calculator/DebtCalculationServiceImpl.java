@@ -14,7 +14,7 @@ public class DebtCalculationServiceImpl implements DebtCalculationService {
     DebtCalculationFactory debtCalculationFactory;
 
     @Override
-    public Calculation processCalculation(CalculationInputData calculationInputData) {
+    public Calculation processCalculation(CalculationInputData inputData) {
 
         DebtCalculator debtCalculator;
 
@@ -24,7 +24,7 @@ public class DebtCalculationServiceImpl implements DebtCalculationService {
 //            debtCalculator = debtCalculationFactory.getDebtCalculatorOneBillHasPayments(calculationInputData);
 //        }
 
-        debtCalculator = debtCalculationFactory.getDebtCalculatorOneBillHasPayments(calculationInputData);
+        debtCalculator = debtCalculationFactory.getDebtCalculatorOneBillHasPayments(inputData);
 
 
 
