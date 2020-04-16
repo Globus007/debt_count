@@ -3,7 +3,6 @@ package com.gleb.st.debt_count.calculator;
 import com.gleb.st.debt_count.entity.calculation.Calculation;
 import com.gleb.st.debt_count.entity.calculation.CalculationInputData;
 import com.gleb.st.debt_count.entity.debtor.Bill;
-import com.gleb.st.debt_count.entity.debtor.Contract;
 import com.gleb.st.debt_count.service.calculator.DebtCalculationService;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;

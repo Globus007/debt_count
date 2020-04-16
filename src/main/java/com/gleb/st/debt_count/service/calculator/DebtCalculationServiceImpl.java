@@ -18,11 +18,15 @@ public class DebtCalculationServiceImpl implements DebtCalculationService {
 
         DebtCalculator debtCalculator;
 
-        if (calculationInputData.getPayments().isEmpty()) {
-            debtCalculator =  debtCalculationFactory.getDebtCalculatorOneBillNoPayments(calculationInputData);
-        } else {
-            debtCalculator = debtCalculationFactory.getDebtCalculatorOneBillHasPayments(calculationInputData);
-        }
+//        if (calculationInputData.getPayments() == null || calculationInputData.getPayments().isEmpty()) {
+//            debtCalculator =  debtCalculationFactory.getDebtCalculatorOneBillNoPayments(calculationInputData);
+//        } else {
+//            debtCalculator = debtCalculationFactory.getDebtCalculatorOneBillHasPayments(calculationInputData);
+//        }
+
+        debtCalculator = debtCalculationFactory.getDebtCalculatorOneBillHasPayments(calculationInputData);
+
+
 
         return debtCalculator.processCalculation();
     }

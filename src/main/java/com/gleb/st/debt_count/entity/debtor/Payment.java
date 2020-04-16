@@ -1,6 +1,5 @@
 package com.gleb.st.debt_count.entity.debtor;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Payment {
