@@ -12,20 +12,20 @@ import java.util.List;
 @Component
 public class DebtCalculatorOneBillNoPayments extends DebtCalculator {
 
-    public DebtCalculatorOneBillNoPayments(CalculationInputData calculationInputData) {
-        super(calculationInputData);
+    public DebtCalculatorOneBillNoPayments(CalculationInputData inputData) {
+        super(inputData);
     }
 
     @Override
     public Calculation processCalculation() {
 
-        Bill bill = calculationInputData.getBills().get(0);
-        LocalDate calculationDate = calculationInputData.getCalculationDate();
+        Bill bill = inputData.getBills().get(0);
+        LocalDate calculationDate = inputData.getCalculationDate();
         List<String> calculationInfo = new ArrayList<>();
         StringBuilder info = new StringBuilder();
 
-        LocalDate paymentDate = calculationInputData.getContract().getPaymentDate();
-        double contractFine = calculationInputData.getFine();
+        LocalDate paymentDate = inputData.getContract().getPaymentDate();
+        double contractFine = inputData.getFine();
 
         long expiration = expirationCounter.calculateExpiration(paymentDate, calculationDate);
         info.append(String.format("C %tF по %tF - %d дня просрочки\n",

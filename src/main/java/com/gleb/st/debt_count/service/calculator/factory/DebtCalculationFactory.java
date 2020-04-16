@@ -16,10 +16,10 @@ public class DebtCalculationFactory {
     private DebtCalculatorOneBillNoPayments debtCalculatorOneBillNoPayments;
 
     public DebtCalculator getDebtCalculatorOneBillHasPayments(CalculationInputData calculationInputData) {
-        return debtCalculatorOneBillHasPayments.setCalculationInputData(calculationInputData);
+        return debtCalculatorOneBillHasPayments.setInputData(calculationInputData);
     }
 
     public DebtCalculator getDebtCalculatorOneBillNoPayments(CalculationInputData calculationInputData) {
-        return debtCalculatorOneBillNoPayments.setCalculationInputData(calculationInputData);
+        return debtCalculatorOneBillNoPayments.setInputData(calculationInputData);
     }
 }

@@ -7,9 +7,7 @@ import com.gleb.st.debt_count.entity.calculation.CalculationInputData;
 import com.gleb.st.debt_count.entity.calculation.RefinancingRate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Calendar;
 
 public abstract class DebtCalculator {
 
@@ -18,14 +16,14 @@ public abstract class DebtCalculator {
     @Autowired
     protected ExpirationCounter expirationCounter;
 
-    protected CalculationInputData calculationInputData;
+    protected CalculationInputData inputData;
 
-    public DebtCalculator(CalculationInputData calculationInputData) {
-        this.calculationInputData = calculationInputData;
+    public DebtCalculator(CalculationInputData inputData) {
+        this.inputData = inputData;
     }
 
-    public DebtCalculator setCalculationInputData(CalculationInputData calculationInputData) {
-        this.calculationInputData = calculationInputData;
+    public DebtCalculator setInputData(CalculationInputData inputData) {
+        this.inputData = inputData;
         return this;
     }
 
