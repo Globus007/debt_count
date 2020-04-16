@@ -22,7 +22,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
 
         double totalFine = 0, totalPercent = 0, totalDebt = 0;
         //todo: NPE fix
-        double contractFine = calculationInputData.getContract().getFine();
+        double contractFine = calculationInputData.getFine();
         List<String> calculationInfo = new ArrayList<>();
         StringBuilder info;
 

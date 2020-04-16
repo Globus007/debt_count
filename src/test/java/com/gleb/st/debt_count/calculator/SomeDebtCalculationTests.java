@@ -40,8 +40,6 @@ public class SomeDebtCalculationTests {
 
     private Calculation processCalculation() {
         CalculationInputData inputData = new CalculationInputData();
-        Contract contract = new Contract();
-        inputData.setContract(contract);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 

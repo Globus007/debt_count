@@ -25,7 +25,7 @@ public class DebtCalculatorOneBillNoPayments extends DebtCalculator {
         StringBuilder info = new StringBuilder();
 
         LocalDate paymentDate = calculationInputData.getContract().getPaymentDate();
-        double contractFine = calculationInputData.getContract().getFine();
+        double contractFine = calculationInputData.getFine();
 
         long expiration = expirationCounter.calculateExpiration(paymentDate, calculationDate);
         info.append(String.format("C %tF по %tF - %d дня просрочки\n",

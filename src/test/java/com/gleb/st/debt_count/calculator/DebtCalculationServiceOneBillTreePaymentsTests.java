@@ -56,11 +56,9 @@ public class DebtCalculationServiceOneBillTreePaymentsTests {
      */
 
     private Calculation processCalculation() {
-        CalculationInputData calculationInputData = new CalculationInputData();
+        CalculationInputData inputData = new CalculationInputData();
 
-        Contract contract = new Contract();
-        contract.setFine(0.15);
-        calculationInputData.setContract(contract);
+        inputData.setFine(0.15);
 
         List<Bill> bills = new ArrayList<>();
         List<Payment> payments = new ArrayList<>();
@@ -72,11 +70,11 @@ public class DebtCalculationServiceOneBillTreePaymentsTests {
         bill.setPaymentDate(LocalDate.parse("2019-05-28"));
         bill.setPayments(payments);
         bills.add(bill);
-        calculationInputData.setBills(bills);
+        inputData.setBills(bills);
 
-        calculationInputData.setCalculationDate(LocalDate.parse("2019-09-16"));
+        inputData.setCalculationDate(LocalDate.parse("2019-09-16"));
 
-        return calculator.processCalculation(calculationInputData);
+        return calculator.processCalculation(inputData);
     }
 
     @Test

@@ -7,7 +7,6 @@ public class Contract {
     private String number;
     private LocalDate date;
     private LocalDate paymentDate;
-    private double fine;
 
     public Contract() {}
 
@@ -35,21 +34,12 @@ public class Contract {
         this.paymentDate = paymentDate;
     }
 
-    public double getFine() {
-        return fine;
-    }
-
-    public void setFine(double fine) {
-        this.fine = fine;
-    }
-
     @Override
     public String toString() {
         return "Contract{" +
                 ", number=" + number +
                 ", date=" + date +
                 ", paymentDate=" + paymentDate +
-                ", fine=" + fine +
                 '}';
     }
 }

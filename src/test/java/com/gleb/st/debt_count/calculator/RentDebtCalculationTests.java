@@ -79,9 +79,7 @@ public class RentDebtCalculationTests {
 
         inputData.setCalculationDate(LocalDate.parse("2020-04-15"));
 
-        Contract contract = new Contract();
-        contract.setFine(0.3);
-        inputData.setContract(contract);
+        inputData.setFine(0.3);
 
         return calculationService.processCalculation(inputData);
     }

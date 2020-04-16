@@ -16,8 +16,17 @@ public class CalculationInputData {
     private List<Bill> bills;
     private LocalDate calculationDate;
     private double totalBalance;
+    private double fine;
 
     public CalculationInputData() {}
+
+    public double getFine() {
+        return fine;
+    }
+
+    public void setFine(double fine) {
+        this.fine = fine;
+    }
 
     public Debtor getDebtor() {
         return debtor;
