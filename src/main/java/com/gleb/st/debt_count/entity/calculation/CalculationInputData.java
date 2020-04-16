@@ -1,13 +1,11 @@
 package com.gleb.st.debt_count.entity.calculation;
 
 import com.gleb.st.debt_count.entity.debtor.Contract;
-import com.gleb.st.debt_count.entity.debtor.Payment;
 import com.gleb.st.debt_count.entity.debtor.Bill;
 import com.gleb.st.debt_count.entity.debtor.Debtor;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
-import java.util.Comparator;
 import java.util.List;
 
 @Component
@@ -16,7 +14,6 @@ public class CalculationInputData {
     private Debtor debtor;
     private Contract contract;
     private List<Bill> bills;
-    private List<Payment> payments;
     private Date calculationDate;
     private double totalBalance;
 
@@ -46,17 +43,6 @@ public class CalculationInputData {
         this.bills = bills;
     }
 
-    public List<Payment> getPayments() {
-        return payments;
-    }
-
-    public void setPayments(List<Payment> payments) {
-        if (payments != null) {
-            payments.sort(Comparator.comparing(Payment::getDate));
-        }
-        this.payments = payments;
-    }
-
     public Date getCalculationDate() {
         return calculationDate;
     }
@@ -79,7 +65,6 @@ public class CalculationInputData {
                 "debtor=" + debtor +
                 ", contract=" + contract +
                 ", bills=" + bills +
-                ", payments=" + payments +
                 ", calculationDate=" + calculationDate +
                 ", totalBalance=" + totalBalance +
                 '}';
