@@ -2,7 +2,6 @@ package com.gleb.st.debt_count.component.calculator;
 
 import com.gleb.st.debt_count.entity.calculation.Calculation;
 import com.gleb.st.debt_count.entity.calculation.CalculationInputData;
-import com.gleb.st.debt_count.entity.calculation.Expiration;
 import com.gleb.st.debt_count.entity.debtor.Bill;
 import com.gleb.st.debt_count.entity.debtor.Payment;
 import org.springframework.stereotype.Component;
@@ -33,7 +32,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
 
             LocalDate startCountDate = bill.getPaymentDate();
             double refinancingRate, fine, percent;
-            Expiration expiration;
+            long expiration;
 
             info = new StringBuilder();
             info.append(String.format("ТТН № %s от %tF на сумму %.2f руб.",
@@ -49,34 +48,35 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                         payment.getAmount()));
 
                 expiration = expirationCounter.calculateExpiration(startCountDate, payment.getDate());
-                fine = calculateFine(debt, contractFine, expiration.getValue());
+                fine = calculateFine(debt, contractFine, expiration);
                 totalFine += fine;
 
                 // adding counting info
                 info.append(String.format("C %tF по %tF - %d дня просрочки\n",
                         startCountDate,
                         payment.getDate(),
-                        expiration.getValue()));
+                        expiration));
                 info.append(String.format("Пеня = %.2f х %.2f%% х %d = %.2f руб.\n",
                         debt,
                         contractFine / 100,
-                        expiration.getValue(),
+                        expiration,
                         fine));
 
+//                expiration = expirationCounter.calculateExpiration(bill.getPaymentDate(), payment.getDate());
                 expiration = expirationCounter.calculateExpiration(bill.getPaymentDate(), payment.getDate());
                 refinancingRate = refinancingRateReader.getRefinancingRateOnDate(payment.getDate()).getValue();
-                percent = calculatePercent(payment.getAmount(), refinancingRate, expiration.getValue());
+                percent = calculatePercent(payment.getAmount(), refinancingRate, expiration);
                 totalPercent += percent;
 
                 // adding counting info
                 info.append(String.format("C %tF по %tF - %d дня просрочки\n",
                         bill.getPaymentDate(),
                         payment.getDate(),
-                        expiration.getValue()));
+                        expiration));
                 info.append(String.format("Проценты = %.2f х %.2f%% х %d /365 = %.2f руб.\n",
                         payment.getAmount(),
                         refinancingRate,
-                        expiration.getValue(),
+                        expiration,
                         percent));
 
                 debt -= payment.getAmount();
@@ -89,35 +89,35 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
             info = new StringBuilder();
 
             expiration = expirationCounter.calculateExpiration(startCountDate, calculationInputData.getCalculationDate());
-            totalFine += calculateFine(debt, contractFine, expiration.getValue());
+            totalFine += calculateFine(debt, contractFine, expiration);
 
             // adding counting info
             info.append(String.format("C %tF по %tF - %d дня просрочки\n",
                     startCountDate,
                     calculationInputData.getCalculationDate(),
-                    expiration.getValue()));
+                    expiration));
             info.append(String.format("Пеня = %.2f х %.2f%% х %d = %.2f руб.\n",
                     debt,
                     contractFine / 100,
-                    expiration.getValue(),
+                    expiration,
                     totalFine));
 
             expiration =
                     expirationCounter.calculateExpiration(bill.getPaymentDate(), calculationInputData.getCalculationDate());
             refinancingRate =
                     refinancingRateReader.getRefinancingRateOnDate(calculationInputData.getCalculationDate()).getValue();
-            percent = calculatePercent(debt, refinancingRate, expiration.getValue());
+            percent = calculatePercent(debt, refinancingRate, expiration);
             totalPercent += percent;
 
             // adding counting info
             info.append(String.format("C %tF по %tF - %d дня просрочки\n",
                     bill.getPaymentDate(),
                     calculationInputData.getCalculationDate(),
-                    expiration.getValue()));
+                    expiration));
             info.append(String.format("Проценты = %.2f х %.2f%% х %d /365 = %.2f руб.\n",
                     debt,
                     refinancingRate,
-                    expiration.getValue(),
+                    expiration,
                     percent));
 
             calculationInfo.add(info.toString());

@@ -3,10 +3,8 @@ package com.gleb.st.debt_count.component.calculator;
 import com.gleb.st.debt_count.entity.debtor.Bill;
 import com.gleb.st.debt_count.entity.calculation.Calculation;
 import com.gleb.st.debt_count.entity.calculation.CalculationInputData;
-import com.gleb.st.debt_count.entity.calculation.Expiration;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,20 +27,20 @@ public class DebtCalculatorOneBillNoPayments extends DebtCalculator {
         LocalDate paymentDate = calculationInputData.getContract().getPaymentDate();
         double contractFine = calculationInputData.getContract().getFine();
 
-        Expiration expiration = expirationCounter.calculateExpiration(paymentDate, calculationDate);
+        long expiration = expirationCounter.calculateExpiration(paymentDate, calculationDate);
         info.append(String.format("C %tF по %tF - %d дня просрочки\n",
                 paymentDate,
                 calculationDate,
-                expiration.getValue()));
+                expiration));
 
         double fine = calculateFine(
                 bill.getAmount(),
                 contractFine,
-                expiration.getValue());
+                expiration);
         info.append(String.format("Пеня = %.2f х %.2f%% х %d = %.2f руб.\n",
                 bill.getAmount(),
                 contractFine/100,
-                expiration.getValue(),
+                expiration,
                 fine));
 
         double refinancingRate = refinancingRateReader.
@@ -51,11 +49,11 @@ public class DebtCalculatorOneBillNoPayments extends DebtCalculator {
         double percent = calculatePercent(
                 bill.getAmount(),
                 refinancingRate,
-                expiration.getValue());
+                expiration);
         info.append(String.format("Проценты = %.2f х %.2f%% х %d /365 = %.2f руб.\n",
                 bill.getAmount(),
                 refinancingRate,
-                expiration.getValue(),
+                expiration,
                 percent));
         calculationInfo.add(info.toString());
 
