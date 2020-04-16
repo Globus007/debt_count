@@ -46,23 +46,23 @@ public class SomeDebtCalculationTests {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
         List<Payment> payments = new ArrayList<>(5);
-        payments.add(new Payment(Date.valueOf(LocalDate.parse("26.11.2019", formatter)), 4_305.19));
-        payments.add(new Payment(Date.valueOf(LocalDate.parse("03.12.2019", formatter)), 1_818.18));
-        payments.add(new Payment(Date.valueOf(LocalDate.parse("19.12.2019", formatter)), 1_818.18));
-        payments.add(new Payment(Date.valueOf(LocalDate.parse("26.12.2019", formatter)), 1_818.18));
-        payments.add(new Payment(Date.valueOf(LocalDate.parse("03.01.2020", formatter)), 12_378.26));
+        payments.add(new Payment(LocalDate.parse("26.11.2019", formatter), 4_305.19));
+        payments.add(new Payment(LocalDate.parse("03.12.2019", formatter), 1_818.18));
+        payments.add(new Payment(LocalDate.parse("19.12.2019", formatter), 1_818.18));
+        payments.add(new Payment(LocalDate.parse("26.12.2019", formatter), 1_818.18));
+        payments.add(new Payment(LocalDate.parse("03.01.2020", formatter), 12_378.26));
 
         Bill bill = new Bill();
         bill.setAmount(22_138.0);
         bill.setPayments(payments);
-        bill.setPaymentDate(Date.valueOf(LocalDate.parse("02.03.2019", formatter)));
+        bill.setPaymentDate(LocalDate.parse("02.03.2019", formatter));
 
         List<Bill> bills = new ArrayList<>(1);
         bills.add(bill);
 
         inputData.setBills(bills);
 
-        inputData.setCalculationDate(Date.valueOf(LocalDate.now()));
+        inputData.setCalculationDate(LocalDate.now());
 
         return calculationService.processCalculation(inputData);
     }

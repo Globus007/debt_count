@@ -7,7 +7,7 @@ import com.gleb.st.debt_count.entity.debtor.Bill;
 import com.gleb.st.debt_count.entity.debtor.Payment;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
 
             double debt = bill.getAmount();
 
-            Date startCountDate = bill.getPaymentDate();
+            LocalDate startCountDate = bill.getPaymentDate();
             double refinancingRate, fine, percent;
             Expiration expiration;
 
@@ -82,7 +82,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                 debt -= payment.getAmount();
                 info.append(String.format("Долг = %.2f руб.", debt));
 
-                startCountDate = getNextDay(payment.getDate());
+                startCountDate = payment.getDate().plusDays(1);
                 calculationInfo.add(info.toString());
             }
 

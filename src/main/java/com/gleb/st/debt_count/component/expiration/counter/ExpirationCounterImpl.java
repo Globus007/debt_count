@@ -12,7 +12,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class ExpirationCounterImpl implements ExpirationCounter {
 
     @Override
-    public Expiration calculateExpiration(Date startDate, Date finalDate) {
+    public Expiration calculateExpiration(LocalDate startDate, LocalDate finalDate) {
 
          LocalDate payDate = LocalDate.parse(startDate.toString());
          LocalDate calculationDate = LocalDate.parse(finalDate.toString());

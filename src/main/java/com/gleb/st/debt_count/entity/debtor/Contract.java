@@ -1,12 +1,12 @@
 package com.gleb.st.debt_count.entity.debtor;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Contract {
 
     private String number;
-    private Date date;
-    private Date paymentDate;
+    private LocalDate date;
+    private LocalDate paymentDate;
     private double fine;
 
     public Contract() {}
@@ -19,19 +19,19 @@ public class Contract {
         this.number = number;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Date getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 

@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +67,7 @@ public class RentDebtCalculationTests {
         LocalDate date = LocalDate.parse("2019-08-11");
         for (int i = 0; i < 6; i++) {
             Bill bill = new Bill();
-            bill.setPaymentDate(Date.valueOf(date));
+            bill.setPaymentDate(date);
             bill.setAmount(865.1);
             bill.setPayments(new ArrayList<>());
 
@@ -78,7 +77,7 @@ public class RentDebtCalculationTests {
 
         inputData.setBills(bills);
 
-        inputData.setCalculationDate(Date.valueOf("2020-04-15"));
+        inputData.setCalculationDate(LocalDate.parse("2020-04-15"));
 
         Contract contract = new Contract();
         contract.setFine(0.3);

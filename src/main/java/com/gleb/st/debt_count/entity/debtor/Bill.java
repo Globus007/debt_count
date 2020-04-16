@@ -1,20 +1,20 @@
 package com.gleb.st.debt_count.entity.debtor;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Bill {
 
     private String number;
-    private Date date;
+    private LocalDate date;
     private double amount;
     private List<Payment> payments;
-    private Date paymentDate;
+    private LocalDate paymentDate;
 
     public Bill() {}
 
-    public Bill(String number, Date date, double amount) {
+    public Bill(String number, LocalDate date, double amount) {
         this.number = number;
         this.date = date;
         this.amount = amount;
@@ -29,11 +29,11 @@ public class Bill {
         this.number = number;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -53,11 +53,11 @@ public class Bill {
         this.payments = payments;
     }
 
-    public Date getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 

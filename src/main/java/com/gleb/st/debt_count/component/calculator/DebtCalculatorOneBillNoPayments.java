@@ -7,6 +7,7 @@ import com.gleb.st.debt_count.entity.calculation.Expiration;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +22,11 @@ public class DebtCalculatorOneBillNoPayments extends DebtCalculator {
     public Calculation processCalculation() {
 
         Bill bill = calculationInputData.getBills().get(0);
-        Date calculationDate = calculationInputData.getCalculationDate();
+        LocalDate calculationDate = calculationInputData.getCalculationDate();
         List<String> calculationInfo = new ArrayList<>();
         StringBuilder info = new StringBuilder();
 
-        Date paymentDate = calculationInputData.getContract().getPaymentDate();
+        LocalDate paymentDate = calculationInputData.getContract().getPaymentDate();
         double contractFine = calculationInputData.getContract().getFine();
 
         Expiration expiration = expirationCounter.calculateExpiration(paymentDate, calculationDate);

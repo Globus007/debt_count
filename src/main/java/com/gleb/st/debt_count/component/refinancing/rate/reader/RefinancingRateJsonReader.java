@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 @Component
@@ -21,7 +21,7 @@ public class RefinancingRateJsonReader implements RefinancingRateReader {
     private final static Logger log = Logger.getLogger(RefinancingRateJsonReader.class.getName());
 
     @Override
-    public RefinancingRate getRefinancingRateOnDate(Date date) {
+    public RefinancingRate getRefinancingRateOnDate(LocalDate date) {
 
         RefinancingRate rate = null;
         RefinancingRate[] refinancingRates;

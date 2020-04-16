@@ -1,24 +1,25 @@
 package com.gleb.st.debt_count.entity.debtor;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Payment {
 
-    private Date date;
+    private LocalDate date;
     private double amount;
 
     public Payment() {}
 
-    public Payment(Date date, double amount) {
+    public Payment(LocalDate date, double amount) {
         this.date = date;
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

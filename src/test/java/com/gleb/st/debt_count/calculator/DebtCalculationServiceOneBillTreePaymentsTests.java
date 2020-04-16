@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +20,6 @@ public class DebtCalculationServiceOneBillTreePaymentsTests {
 
     @Autowired
     private DebtCalculationService calculator;
-
-    private Calculation calculation;
 
     /*
         ТТН № 1038486 от 13.05.2019 г.  на сумму 10 606,31 руб.
@@ -66,21 +64,19 @@ public class DebtCalculationServiceOneBillTreePaymentsTests {
 
         List<Bill> bills = new ArrayList<>();
         List<Payment> payments = new ArrayList<>();
-        payments.add(new Payment(Date.valueOf("2019-06-28"), 1_000.00));
-        payments.add(new Payment(Date.valueOf("2019-07-26"), 500.00));
-        payments.add(new Payment(Date.valueOf("2019-08-13"), 500.00));
+        payments.add(new Payment(LocalDate.parse("2019-06-28"), 1_000.00));
+        payments.add(new Payment(LocalDate.parse("2019-07-26"), 500.00));
+        payments.add(new Payment(LocalDate.parse("2019-08-13"), 500.00));
 
-        Bill bill = new Bill("1038486", Date.valueOf("2019-05-13"), 10_606.31);
-        bill.setPaymentDate(Date.valueOf("2019-05-28"));
+        Bill bill = new Bill("1038486", LocalDate.parse("2019-05-13"), 10_606.31);
+        bill.setPaymentDate(LocalDate.parse("2019-05-28"));
         bill.setPayments(payments);
         bills.add(bill);
         calculationInputData.setBills(bills);
 
-        calculationInputData.setCalculationDate(Date.valueOf("2019-09-16"));
+        calculationInputData.setCalculationDate(LocalDate.parse("2019-09-16"));
 
-
-        calculation = calculator.processCalculation(calculationInputData);
-        return calculation;
+        return calculator.processCalculation(calculationInputData);
     }
 
     @Test

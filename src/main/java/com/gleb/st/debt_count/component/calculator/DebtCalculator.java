@@ -8,6 +8,7 @@ import com.gleb.st.debt_count.entity.calculation.RefinancingRate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public abstract class DebtCalculator {
@@ -35,7 +36,7 @@ public abstract class DebtCalculator {
         return amount * (percent / 100) * delayPeriod;
     }
 
-    protected double calculatePercent(double amount, Date calculationDate, long delayPeriod) {
+    protected double calculatePercent(double amount, LocalDate calculationDate, long delayPeriod) {
         // ставка рефинансирования на дату рассчета
         RefinancingRate rate = refinancingRateReader.getRefinancingRateOnDate(calculationDate);
         // Проценты = долг * ставка нбрб/100 * дни/365
@@ -47,10 +48,4 @@ public abstract class DebtCalculator {
         return amount * (refinancingRate / 100) * ((double) delayPeriod / 365);
     }
 
-    protected Date getNextDay(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        return new Date(calendar.getTimeInMillis());
-    }
 }

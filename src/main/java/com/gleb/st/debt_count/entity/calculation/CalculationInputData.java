@@ -5,7 +5,7 @@ import com.gleb.st.debt_count.entity.debtor.Bill;
 import com.gleb.st.debt_count.entity.debtor.Debtor;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -14,7 +14,7 @@ public class CalculationInputData {
     private Debtor debtor;
     private Contract contract;
     private List<Bill> bills;
-    private Date calculationDate;
+    private LocalDate calculationDate;
     private double totalBalance;
 
     public CalculationInputData() {}
@@ -43,11 +43,11 @@ public class CalculationInputData {
         this.bills = bills;
     }
 
-    public Date getCalculationDate() {
+    public LocalDate getCalculationDate() {
         return calculationDate;
     }
 
-    public void setCalculationDate(Date calculationDate) {
+    public void setCalculationDate(LocalDate calculationDate) {
         this.calculationDate = calculationDate;
     }
 
