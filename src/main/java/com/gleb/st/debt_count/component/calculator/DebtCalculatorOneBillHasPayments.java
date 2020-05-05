@@ -65,7 +65,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                         expiration));
                 info.append(String.format("Пеня = %.2f х %.2f%% х %d = %.2f руб.\n",
                         debt,
-                        contractFine / 100,
+                        contractFine,
                         expiration,
                         fine));
 
@@ -104,7 +104,7 @@ public class DebtCalculatorOneBillHasPayments extends DebtCalculator {
                     expiration));
             info.append(String.format("Пеня = %.2f х %.2f%% х %d = %.2f руб.\n",
                     debt,
-                    contractFine / 100,
+                    contractFine,
                     expiration,
                     totalFine));
 
