@@ -70,12 +70,13 @@ public class CalculationInputData {
 
     @Override
     public String toString() {
-        return "CalculationData{" +
+        return "CalculationInputData{" +
                 "debtor=" + debtor +
                 ", contract=" + contract +
                 ", bills=" + bills +
                 ", calculationDate=" + calculationDate +
                 ", totalBalance=" + totalBalance +
+                ", fine=" + fine +
                 '}';
     }
 }
