@@ -15,7 +15,9 @@
 	<description>App counts debt</description>
 
 	<properties>
-		<java.version>1.14</java.version>
+		<java.version>14</java.version>
+		<maven.compiler.source>14</maven.compiler.source>
+		<maven.compiler.target>14</maven.compiler.target>
 	</properties>
 
 	<dependencies>
@@ -51,6 +53,7 @@
 
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<release>14</release>
 					<compilerArgs>
@@ -58,6 +61,19 @@
 					</compilerArgs>
 					<forceJavacCompilerUse>true</forceJavacCompilerUse>
 					<parameters>true</parameters>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<appName>debt-count</appName>
+					<jdkVersion>14</jdkVersion>
+					<processTypes>
+						<web>java $JAVA_OPTS --enable-preview</web>
+					</processTypes>
 				</configuration>
 			</plugin>
 
@@ -71,3 +87,4 @@
 	</build>
 
 </project>
+
